@@ -1,0 +1,49 @@
+\documentclass{beamer}
+\usetheme{blue} %light print
+
+\title{Presentation Title}
+\subtitle{Subtitle}
+\author{Jens Boberski}
+\institute{Universit\"at Duisburg-Essen}
+\date{October 2012}
+
+\begin{document}
+\titleframe
+\outlineframe
+ \section{Boxes}
+\begin{frame}
+  \frametitle{A regular box with text}
+  
+  \begin{cblock}{6cm}
+    Equation of motion:
+    \begin{equation*}
+      \partial_t p_\alpha + \partial_\beta (v_\beta p_\alpha) = \partial_\beta \sigma_{\alpha \beta} + b_\alpha
+    \end{equation*}
+    \vspace{-2em}
+  \end{cblock}
+This is done with the cblock environment with the horizontal size as an argument.
+  \textref{and some credits with textref}   
+\end{frame}
+\section{Shaded Text}
+\begin{frame}
+    \frametitle{Custom shaded text}
+    \textsh{\Huge{This is very important}}
+
+    Just use textsh
+\end{frame}
+
+
+\section{Bullet Points}
+\begin{frame}
+  \frametitle{If you have to use them}
+  \begin{itemize}
+    \item This is one item
+    \item Here is another one
+      \begin{itemize}
+        \item a subitem
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\end{document}

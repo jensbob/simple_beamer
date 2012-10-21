@@ -1,0 +1,296 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% loading some useful packages %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{mathptmx} % fonts
+\usepackage{dsfont,amsmath,color} 
+
+\usepackage{DejaVuSans}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+%%%%%%%%%%
+% colors %
+%%%%%%%%%%
+% Option "light" for white background and blue toc
+% No option -> blue background and green toc
+
+\newif\if@doLightOption
+\@doLightOptionfalse
+\DeclareOption{light}{\@doLightOptiontrue}
+
+\newif\if@doPrintOption
+\@doPrintOptionfalse
+\DeclareOption{print}{\@doPrintOptiontrue}
+\ProcessOptions
+
+\if@doPrintOption
+%PRINT COLORS
+\definecolor{fgcol}{RGB}{0,0,0} % text color
+\definecolor{fg2col}{RGB}{100,100,100}% math color
+\definecolor{fg3col}{RGB}{100,100,100} % bullets color
+\definecolor{thebg}{RGB}{255,255,255} % background outside
+\definecolor{thebg2}{RGB}{255,255,255} % background inside
+\definecolor{sepbg}{RGB}{255,255,255} % section toc background outside
+\definecolor{sepbg2}{RGB}{255,255,255} % inside
+\definecolor{fgtoc}{RGB}{100,100,100} % text color
+\else
+\if@doLightOption
+%LIGHT COLORS
+\definecolor{fgcol}{RGB}{15,15,15} % text color
+\definecolor{fg2col}{RGB}{70,100, 150}% math color
+\definecolor{fg3col}{RGB}{70,100,150} % bullets color
+\definecolor{thebg}{RGB}{230,230,220} % background outside
+\definecolor{thebg2}{RGB}{255,255,255} % background inside
+\definecolor{sepbg}{RGB}{60, 90, 120} % section toc background outside
+\definecolor{sepbg2}{RGB}{115, 145, 179} % inside
+\definecolor{fgtoc}{RGB}{240,240,240} % text color
+\else
+%DARK BLUE COLORS
+\definecolor{fgcol}{RGB}{240,240,240} % text color
+\definecolor{fg2col}{RGB}{240,240,240} % math color
+\definecolor{fg3col}{RGB}{150,173,102} % bullets color
+\definecolor{thebg}{RGB}{60,90,120} % background outside
+\definecolor{thebg2}{RGB}{115,145,179} % background inside
+\definecolor{sepbg}{RGB}{106, 126, 52} % section toc background outside
+\definecolor{sepbg2}{RGB}{150, 173, 102} % inside
+\definecolor{fgtoc}{RGB}{240,240,240} % text color
+\fi
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% beamer default theme as starting point %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<presentation>
+{
+  \usetheme{default}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+}
+
+\setbeamertemplate{background}
+{
+\begin{tikzpicture}
+\shade[draw=none,shading=radial, inner color=thebg2, outer color=thebg]
+     (0,0) rectangle (\paperwidth,\paperheight);
+\end{tikzpicture}
+\mode<handout>{\setbeamertemplate{background}{}  }
+}
+
+\beamertemplatenavigationsymbolsempty
+
+\setbeamersize{text margin left=2em,text margin right=1em}
+
+\setbeamercolor{item}{fg=fg3col} % adjusts the bullet color
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{itemize subitem}[default]
+\setbeamercolor{normal text}{fg=fgcol}
+\setbeamercolor{math text}{fg=fg2col}
+\setbeamercolor{math text inlined}{fg=fgcol}
+\setbeamercolor{normal text in math text}{fg=fgcol}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TOC set up for unnumbered cicle %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% One way to add TOC/Outline
+%\begin{frame}{Outline}
+%\vfill
+%\begin{minipage}[t][4cm][t]{\textwidth}
+%\tableofcontents
+%\end{minipage}
+%\vfill
+%\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Automatic Table of Conents at sections %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\AtBeginSection[]
+{
+{\setbeamertemplate{footline}{} 
+\setbeamercolor{section in toc}{fg=fgtoc}
+\setbeamerfont{section in toc}{size=\Huge}
+\setbeamerfont{section in toc shaded}{size=\tiny}
+\setbeamercolor{section in toc shaded}{fg=fgtoc}
+\setbeamertemplate{section in toc shaded}[default][100]
+\setbeamertemplate{section in toc}{\vspace*{0.3em}\hspace*{-0.1em}\inserttocsection}
+\begin{dframe}
+\vspace{1cm}
+ \begin{minipage}{\textwidth}
+\tableofcontents[currentsection]
+  \end{minipage}
+\addtocounter{framenumber}{-1}
+\end{dframe}
+}
+}
+
+
+%%%%%%%%%%%%%%%
+% shaded text %
+%%%%%%%%%%%%%%%
+\newcommand\textsh[1]{\begin{tikzpicture}
+\foreach \i in {0,1,2,3,4,5,6,7,8}
+{
+ \node[color=black,opacity=0.1-0.01*\i,minimum height=0,inner sep=0] at (0.01em+\i*0.01em,-0.01em-\i*0.01em) {#1};
+}
+       \node[minimum height=0,inner sep=0] at (0,0) {#1};
+     \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% reference in corner %
+%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[absolute,overlay]{textpos} % text references in slide corners
+\newcommand\textref[1]{%
+  \begin{textblock*}{0.96\paperwidth}(0pt,1.025\textheight)
+  \raggedleft \tiny{\emph{#1}}\hspace{.5em}
+  \end{textblock*}}
+
+%%%%%%%%%%%%%%%%%%%%%
+% blocks with frame %
+%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tcolorbox}
+
+\newenvironment{cblock}[1]{\begin{tcolorbox}[colback=thebg,colframe=fgcol!75!thebg,width=#1,boxrule=0.7pt,coltext=fgcol]}{\end{tcolorbox}}
+
+\newenvironment{tblock}[2]{\begin{tcolorbox}[title=#2,colback=thebg,colframe=fgcol!75!thebg,width=#1,coltext=fgcol]}{\end{tcolorbox}}
+
+%%%%%%%%%%%%%%%%%%%
+% divider frame   %
+%%%%%%%%%%%%%%%%%%%
+\newenvironment{dframe}{
+\setbeamertemplate{background}
+{
+\begin{tikzpicture}
+\shade[draw=none,shading=radial, inner color=sepbg2, outer color=sepbg]
+     (0,0) rectangle (\paperwidth,\paperheight);
+\end{tikzpicture}
+\mode<handout>{\setbeamertemplate{background}{}  }
+}
+\begin{frame}
+\vspace{5cm}
+}
+{
+\end{frame}\setbeamertemplate{background}
+{
+\begin{tikzpicture}
+\shade[draw=none,shading=radial, inner color=thebg2, outer color=thebg]
+     (0,0) rectangle (\paperwidth,\paperheight);
+\end{tikzpicture}
+\mode<handout>{\setbeamertemplate{background}{}  }
+}
+}
+
+%%%%%%%%%%%%%%
+% Title page %
+%%%%%%%%%%%%%%    
+\newcommand{\titleframe}{
+ 
+{\setbeamertemplate{footline}{} 
+\begin{frame}
+%\begin{center}
+  \titlepage
+%\end{center}
+\end{frame}
+}
+\setcounter{framenumber}{0}
+}
+\defbeamertemplate*{title page}{due}{
+    \vfill
+    {\vspace{1cm}\color{fgcol}\Huge{\textbf{\inserttitle}}}\\\vspace{0.3cm}
+    \ifx\insertsubtitle\@empty 
+    \else{\color{fgcol!70!thebg2}\Large{\insertsubtitle}}\\[\baselineskip]\fi
+ \begin{minipage}{0.97\textwidth}
+\raggedright
+    \ifx\insertauthor\@empty\ \\
+    \else{\vspace{3.5cm}\hfill\color{fgcol}\textbf{\insertauthor}}\\\fi
+    \ifx\insertinstitute\@empty 
+    \else{\hfill\footnotesize\color{fgcol}\insertinstitute}\\\fi
+    \ifx\insertdate\@empty\ \\
+    \else{\vspace{1cm}\hfill\color{fgcol}\tiny\insertdate}\\\fi 
+\end{minipage}
+   \vfill
+}
+
+%%%%%%%%%%%
+% Outline %
+%%%%%%%%%%%
+\defbeamertemplate{section in toc}{circle unnumbered}
+{\leavevmode\leftskip=2ex%
+  \llap{%
+    \usebeamerfont*{section number projected}%
+    \usebeamercolor{section number projected}%
+    \begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex}
+      \color{bg}
+      \pgfpathcircle{\pgfpoint{0pt}{1ex}}{1ex}
+      \pgfusepath{fill}
+%   \pgftext[base]{\color{fg}}%\inserttocsectionnumber}
+    \end{pgfpicture}\kern1.25ex%
+  }%
+  \hspace{0.3em}\inserttocsection\par}
+
+
+
+
+\defbeamertemplate{subsection in toc}{circle unnumbered}
+{\leavevmode\leftskip=2em\inserttocsubsection\par}
+
+\setbeamercolor{section in toc}{fg=fgtoc}
+\setbeamerfont{section in toc}{size=\LARGE}
+\setbeamertemplate{section in toc}[circle unnumbered]
+
+
+
+\newcommand{\outlineframe}{
+\begin{frame}
+	\Huge{\textbf{Outline}}
+ \begin{minipage}[t][4cm][t]{\textwidth}
+    \tableofcontents
+ \end{minipage}
+ \vfill
+ \end{frame}
+ }
+
+%%%%%%%%%%%%
+% headline %
+%%%%%%%%%%%%
+\defbeamertemplate*{headline}{due}
+{
+}
+
+%%%%%%%%%%%%%
+% foot line %
+%%%%%%%%%%%%%
+\defbeamertemplate*{footline}{due}
+{
+  \leavevmode%
+  \hbox{%
+    \begin{beamercolorbox}[wd=1\paperwidth,ht=2.25ex,dp=1ex,right]{pagenumber in footer}%
+      \color{thebg!80!fgcol}\insertframenumber{} \hspace*{0.8ex}
+% total frame number not really needed - is just distracting
+%      \color{thebg2}\insertframenumber{}/\inserttotalframenumber \hspace*{1ex}
+    \end{beamercolorbox}
+  }%
+  \vskip0pt%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% Frame title styling %
+%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{frametitle}{
+\begin{flushleft} 
+\color{fgcol}\begin{LARGE}{\insertframetitle }\end{LARGE}
+% a frame should not have a subtitle - use as little text as possible
+%\color{fgcol!70!thebg}\begin{small}\insertframesubtitle\end{small} 
+\end{flushleft}
+\vskip-24pt
+\vfill
+}
