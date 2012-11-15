@@ -30,36 +30,36 @@
 
 \if@doPrintOption
 %PRINT COLORS
-\definecolor{fgcol}{RGB}{0,0,0} % text color
-\definecolor{fg2col}{RGB}{100,100,100}% math color
-\definecolor{fg3col}{RGB}{100,100,100} % bullets color
-\definecolor{thebg}{RGB}{255,255,255} % background outside
-\definecolor{thebg2}{RGB}{255,255,255} % background inside
-\definecolor{sepbg}{RGB}{255,255,255} % section toc background outside
-\definecolor{sepbg2}{RGB}{255,255,255} % inside
-\definecolor{fgtoc}{RGB}{100,100,100} % text color
+   \definecolor{fgcol}{RGB}{0,0,0} % text color
+   \definecolor{fg2col}{RGB}{100,100,100}% math color
+   \definecolor{fg3col}{RGB}{100,100,100} % bullets color
+   \definecolor{thebg}{RGB}{255,255,255} % background outside
+   \definecolor{thebg2}{RGB}{255,255,255} % background inside
+   \definecolor{sepbg}{RGB}{255,255,255} % section toc background outside
+   \definecolor{sepbg2}{RGB}{255,255,255} % inside
+   \definecolor{fgtoc}{RGB}{100,100,100} % text color
 \else
-\if@doLightOption
+   \if@doLightOption
 %LIGHT COLORS
-\definecolor{fgcol}{RGB}{15,15,15} % text color
-\definecolor{fg2col}{RGB}{70,100, 150}% math color
-\definecolor{fg3col}{RGB}{70,100,150} % bullets color
-\definecolor{thebg}{RGB}{230,230,220} % background outside
-\definecolor{thebg2}{RGB}{255,255,255} % background inside
-\definecolor{sepbg}{RGB}{60, 90, 120} % section toc background outside
-\definecolor{sepbg2}{RGB}{115, 145, 179} % inside
-\definecolor{fgtoc}{RGB}{240,240,240} % text color
-\else
+     \definecolor{fgcol}{RGB}{15,15,15} % text color
+     \definecolor{fg2col}{RGB}{70,100, 150}% math color
+     \definecolor{fg3col}{RGB}{70,100,150} % bullets color
+     \definecolor{thebg}{RGB}{230,230,220} % background outside
+     \definecolor{thebg2}{RGB}{255,255,255} % background inside
+     \definecolor{sepbg}{RGB}{60, 90, 120} % section toc background outside
+     \definecolor{sepbg2}{RGB}{115, 145, 179} % inside
+     \definecolor{fgtoc}{RGB}{240,240,240} % text color
+   \else
 %DARK BLUE COLORS
-\definecolor{fgcol}{RGB}{240,240,240} % text color
-\definecolor{fg2col}{RGB}{240,240,240} % math color
-\definecolor{fg3col}{RGB}{150,173,102} % bullets color
-\definecolor{thebg}{RGB}{60,90,120} % background outside
-\definecolor{thebg2}{RGB}{115,145,179} % background inside
-\definecolor{sepbg}{RGB}{106, 126, 52} % section toc background outside
-\definecolor{sepbg2}{RGB}{150, 173, 102} % inside
-\definecolor{fgtoc}{RGB}{240,240,240} % text color
-\fi
+      \definecolor{fgcol}{RGB}{240,240,240} % text color
+      \definecolor{fg2col}{RGB}{240,240,240} % math color
+      \definecolor{fg3col}{RGB}{150,173,102} % bullets color
+      \definecolor{thebg}{RGB}{60,90,120} % background outside
+      \definecolor{thebg2}{RGB}{115,145,179} % background inside
+      \definecolor{sepbg}{RGB}{106, 126, 52} % section toc background outside
+      \definecolor{sepbg2}{RGB}{150, 173, 102} % inside
+      \definecolor{fgtoc}{RGB}{240,240,240} % text color
+   \fi
 \fi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % beamer default theme as starting point %
@@ -73,11 +73,11 @@
 
 \setbeamertemplate{background}
 {
-\begin{tikzpicture}
-\shade[draw=none,shading=radial, inner color=thebg2, outer color=thebg]
-     (0,0) rectangle (\paperwidth,\paperheight);
-\end{tikzpicture}
-\mode<handout>{\setbeamertemplate{background}{}  }
+   \begin{tikzpicture}
+     \shade[draw=none,shading=radial, inner color=thebg2, outer color=thebg]
+        (0,0) rectangle (\paperwidth,\paperheight);
+   \end{tikzpicture}
+   \mode<handout>{\setbeamertemplate{background}{}  }
 }
 
 \beamertemplatenavigationsymbolsempty
@@ -92,42 +92,27 @@
 \setbeamercolor{math text inlined}{fg=fgcol}
 \setbeamercolor{normal text in math text}{fg=fgcol}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TOC set up for unnumbered cicle %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% One way to add TOC/Outline
-%\begin{frame}{Outline}
-%\vfill
-%\begin{minipage}[t][4cm][t]{\textwidth}
-%\tableofcontents
-%\end{minipage}
-%\vfill
-%\end{frame}
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Automatic Table of Conents at sections %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \AtBeginSection[]
 {
-{\setbeamertemplate{footline}{} 
-\setbeamercolor{section in toc}{fg=fgtoc}
-\setbeamerfont{section in toc}{size=\Huge}
-\setbeamerfont{section in toc shaded}{size=\tiny}
-\setbeamercolor{section in toc shaded}{fg=fgtoc}
-\setbeamertemplate{section in toc shaded}[default][100]
-\setbeamertemplate{section in toc}{\vspace*{0.3em}\hspace*{-0.1em}\inserttocsection}
-\begin{dframe}
-\vspace{1cm}
- \begin{minipage}{\textwidth}
-\tableofcontents[currentsection]
-  \end{minipage}
-\addtocounter{framenumber}{-1}
-\end{dframe}
+{
+   \setbeamertemplate{footline}{} 
+   \setbeamercolor{section in toc}{fg=fgtoc}
+   \setbeamerfont{section in toc}{size=\Huge}
+   \setbeamerfont{section in toc shaded}{size=\tiny}
+   \setbeamercolor{section in toc shaded}{fg=fgtoc}
+   \setbeamertemplate{section in toc shaded}[default][100]
+   \setbeamertemplate{section in toc}{\vspace*{0.3em}\hspace*{-0.1em}\inserttocsection}
+   \begin{dframe}
+      \vspace{1cm}
+      \begin{minipage}{\textwidth}
+         \tableofcontents[currentsection]
+      \end{minipage}
+      \addtocounter{framenumber}{-1}
+   \end{dframe}
 }
 }
 
@@ -138,7 +123,7 @@
 \newcommand\textsh[1]{\begin{tikzpicture}
 \foreach \i in {0,1,2,3,4,5,6,7,8}
 {
- \node[color=black,opacity=0.1-0.01*\i,minimum height=0,inner sep=0] at (0.01em+\i*0.01em,-0.01em-\i*0.01em) {#1};
+ \node[color=black,opacity=0.1-0.01*\i,minimum height=0,inner sep=0] at (0.01em+\i*0.015em,-0.01em-\i*0.015em) {#1};
 }
        \node[minimum height=0,inner sep=0] at (0,0) {#1};
      \end{tikzpicture}
@@ -191,6 +176,8 @@
 %%%%%%%%%%%%%%
 % Title page %
 %%%%%%%%%%%%%%    
+\newcommand{\titlelogo}[1]{\renewcommand{\inserttitlelogo}{\includegraphics[height=5cm]{#1}}}
+\global\let\inserttitlelogo\@empty
 \newcommand{\titleframe}{
  
 {\setbeamertemplate{footline}{} 
@@ -207,10 +194,14 @@
     {\vspace{1cm}\color{fgcol}\Huge{\textbf{\inserttitle}}}\\\vspace{0.3cm}
     \ifx\insertsubtitle\@empty 
     \else{\color{fgcol!70!thebg2}\Large{\insertsubtitle}}\\[\baselineskip]\fi
+    \ifx\inserttitlelogo\@empty
+    \vspace{3.5cm}
+    \else\hspace{1.5cm}\inserttitlelogo \vspace{-1.5cm} \\
+    \fi
  \begin{minipage}{0.97\textwidth}
 \raggedright
     \ifx\insertauthor\@empty\ \\
-    \else{\vspace{3.5cm}\hfill\color{fgcol}\textbf{\insertauthor}}\\\fi
+    \else{\hfill\color{fgcol}\textbf{\insertauthor}}\\\fi
     \ifx\insertinstitute\@empty 
     \else{\hfill\footnotesize\color{fgcol}\insertinstitute}\\\fi
     \ifx\insertdate\@empty\ \\
@@ -219,9 +210,21 @@
    \vfill
 }
 
-%%%%%%%%%%%
-% Outline %
-%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Outline and  TOC set up for unnumbered cicle %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% One way to add TOC/Outline
+%\begin{frame}{Outline}
+%\vfill
+%\begin{minipage}[t][4cm][t]{\textwidth}
+%\tableofcontents
+%\end{minipage}
+%\vfill
+%\end{frame}
+
+
 \defbeamertemplate{section in toc}{circle unnumbered}
 {\leavevmode\leftskip=2ex%
   \llap{%
@@ -242,7 +245,7 @@
 \defbeamertemplate{subsection in toc}{circle unnumbered}
 {\leavevmode\leftskip=2em\inserttocsubsection\par}
 
-\setbeamercolor{section in toc}{fg=fgtoc}
+\setbeamercolor{section in toc}{fg=fgcol}
 \setbeamerfont{section in toc}{size=\LARGE}
 \setbeamertemplate{section in toc}[circle unnumbered]
 

@@ -1,19 +1,22 @@
 \documentclass{beamer}
-\usetheme{blue} %light print
+\usetheme{blue} %options: light,  print
 
 \title{Presentation Title}
 \subtitle{Subtitle}
-\author{Jens Boberski}
-\institute{Universit\"at Duisburg-Essen}
-\date{October 2012}
+\author{Author Name}
+\institute{Institute}
+\date{date}
+\titlelogo{pack} %optional image on the title frame
 
 \begin{document}
+%The title frame can be added using
 \titleframe
-\outlineframe
+%Frame with the outline (sections only! subsections will mess up the layout at the moment)
+%If sections are used there will be an automatic overview frame at the beginning of each section.
+%\outlineframe
  \section{Boxes}
 \begin{frame}
   \frametitle{A regular box with text}
-  
   \begin{cblock}{6cm}
     Equation of motion:
     \begin{equation*}
@@ -27,7 +30,7 @@ This is done with the cblock environment with the horizontal size as an argument
 \section{Shaded Text}
 \begin{frame}
     \frametitle{Custom shaded text}
-    \textsh{\Huge{This is very important}}
+    \textsh{\Huge{This is stands out a little}}
 
     Just use textsh
 \end{frame}
